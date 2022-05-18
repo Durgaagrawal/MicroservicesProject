@@ -40,8 +40,8 @@ public class TeamControllerTest {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/team/teamByName/RCB").accept(MediaType.APPLICATION_JSON);
 		MvcResult result=mockMvc.perform(requestBuilder).andReturn();
 		System.out.println(result.getResponse());
-		String expected ="{team_id:1,teamName:RCB,teamMaxBudget:8000}";
-		JSONAssert.assertEquals(expected, result.getResponse().getContentType(),false);			
+		String expected ="{team_id:101,teamName:RCB,teamMaxBudget:8000}";
+		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(),false);
 		
 	}
 }
