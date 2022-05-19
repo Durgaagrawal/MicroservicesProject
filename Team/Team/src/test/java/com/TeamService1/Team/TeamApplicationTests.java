@@ -20,6 +20,8 @@ import com.TeamService1.Team.Controller.TeamController;
 import com.TeamService1.Team.Entity.Team;
 import com.TeamService1.Team.Service.TeamService;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = TeamController.class)
 public class TeamApplicationTests {
@@ -31,7 +33,6 @@ public class TeamApplicationTests {
 	private TeamService teamService;
 	
 	Team team=new Team(101,"RCB",8000);
-	
 	//String exampleTeamJson=
 	
 	@Test
@@ -47,11 +48,11 @@ public class TeamApplicationTests {
 	
 	@Test
 	public void retriveTeamNames() throws Exception{
-		Mockito.when(teamService.allTeamName()).thenReturn((List<String>) team);
+		Mockito.when(teamService.allTeamName()).thenReturn(List.of(team.getTeamName()));
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/team/teamName").accept(MediaType.APPLICATION_JSON);
 		MvcResult result=mockMvc.perform(requestBuilder).andReturn();
 		System.out.println(result.getResponse());
-		String expected ="{teamName:RCB}";
+		String expected ="{RCB}";
 		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(),false);			
 	}
 }
